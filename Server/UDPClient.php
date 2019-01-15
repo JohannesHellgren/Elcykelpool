@@ -33,7 +33,7 @@ $coilValue = 0x01;
 $errorCount = 0;
 error_reporting(~E_WARNING);
 
-$recData1 = 0; 
+$recData1 = 0;
 $state = 0;
 
 // Create a UDP socket
