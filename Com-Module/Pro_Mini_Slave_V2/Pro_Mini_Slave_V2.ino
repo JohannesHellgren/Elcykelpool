@@ -74,14 +74,12 @@ void setup() {
   delay(30);
 
   /*
-    Set by server
-    0x3E  -  1=Give bike to customer
+    0x3E  -  Give bike to customer
     0x3F  -
-    Read from server
-    0x40  -  1=Bike in garage
-    0x41  -  1=Bike availible for rent
+    0x40  -  Bike in garage
+    0x41  -  Bike availible for rent
     0x42  -  Battery charging status
-    0x43  -  1=Bike at top position
+    0x43  -  Bike at top position
     0x44  -
     0x45  -
   */
@@ -153,15 +151,15 @@ void loop() {
   RTUPoll();
 
   // Update value in coils from pin inputs
-  //updateCoils();
+  updateCoils();
 
-  // Pick up or turn in leased bike
+  // Start garage if customer wants to pick up or turn in leased bike. Controlled by Coil ox3E
   systemControl();
 }
 
 // Give out or return leased bike
 void systemControl() {
-  if (openGarage) {
+  if (ModbusRTUServer.coilRead(0x3E) {
     switch (doorStage) {
       case 0:                    // Closed door from start
         if (!garageOn) {
@@ -456,10 +454,6 @@ void ForceSingleCoil() {
   RS485.write(dataLo);
   RS485.write(EOT);
   postTransmission();
-
-  if (addressLo == 0x3E) {
-    openGarage = true;
-  }
 }
 
 void printBuffer() {
@@ -496,30 +490,28 @@ void postTransmission() {
 // Update value in coils from pin inputs
 void updateCoils() {
   /*
-    Set by server
-    0x3E  -  1=Give bike to customer
-    0x3F  -
-    Read from server
-    0x40  -  1=Bike in garage
-    0x41  -  1=Bike availible for rent
+    0x3E  -  Give bike to customer
+    0x3F  - 
+    0x40  -  Bike in garage
+    0x41  -  Bike availible for rent
     0x42  -  Battery charging status
-    0x43  -  1=Bike at top position
+    0x43  -  Bike at top position
     0x44  -
     0x45  -
   */
   // Battery charging status
   byte value = (((analogRead(chargercurrent)) * 0.0049) - 2.5) / 0.2;
   ModbusRTUServer.coilWrite(0x42, value);
-  /*
-    // Make bika availible for hire if bike battery is full
-    if (ModbusRTUServer.coilRead(0x40) {
-    if (value <= 0) {
-      ModbusRTUServer.coilWrite(0x41, 0x01);
-    }
-    else {
-      ModbusRTUServer.coilWrite(0x41, 0x00);
-    }
-    }*/
+  
+  // Make bika availible for hire if bike battery is full
+  if (ModbusRTUServer.coilRead(0x40) {
+  if (value <= 10) {
+    ModbusRTUServer.coilWrite(0x41, 0x01);
+  }
+  else {
+    ModbusRTUServer.coilWrite(0x41, 0x00);
+  }
+  }
 
   // Bike at top postiion
   value = digitalRead(liftup);
