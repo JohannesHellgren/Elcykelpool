@@ -1,8 +1,8 @@
 /*
- Chat Server
+ UDP - RS485 Gateway
 
- A server that distributes any incoming UDP modbus messages to all
- connected slaves.
+ A server that distributes any incoming UDP modbus messages from client to all
+ connected slaves, and vice versa
  Using an Arduino Wiznet Ethernet shield.
 
  Circuit:
@@ -19,12 +19,6 @@
 
 #include <ArduinoRS485.h> // ArduinoModbus depends on the ArduinoRS485 library
 //#include <ArduinoModbus.h>
-
-/*
-  485 message : 01 03 01 00 3E 00 08 04
-  udp message :    01 01 00 3E 00 08 
-*/
-
 
 /*
   ------- UDP -------
