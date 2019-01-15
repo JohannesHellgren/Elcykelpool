@@ -61,117 +61,9 @@ if (!socket_bind($socket, "192.168.1.10", "8888")) {
 echo "Socket bind OK \n";
 
 while (1) {
-    /*
-    echo "------------------------------------------------------------------------ \n";
-    echo "--------------------------- READ BIKE STATUS ---------------------------\n";
-    echo "------------------------------------------------------------------------ \n";
-    while (readCoils($slaveID, $address40, $numCoils) != true) {     // SlaveID, Coil starting address, number of coils
-        $errorCount++;
-        echo "errorCount: " . $errorCount . "\n";
-        sleep($beat_period);
-        if ($errorCount==5) {
-            $errorCount = 0;
-            break;
-        }
-    }
-    sleep($beat_period);
-
-    echo "------------------------------------------------------------------------ \n";
-    echo "------------------------------ GIVE BIKE -------------------------------\n";
-    echo "------------------------------------------------------------------------ \n";
-    while (readCoils($slaveID, $address3E, $numCoils) != true) {     // SlaveID, Coil starting address, number of coils
-        $errorCount++;
-        echo "errorCount: " . $errorCount . "\n";
-        sleep($beat_period);
-        if ($errorCount==5) {
-            $errorCount = 0;
-            break;
-        }
-    }
-    sleep($beat_period);
-
-    echo "------------------------ \n";
-    while (writeSingleCoil($slaveID, $address3E, $coilValue) != true) {     // SlaveID, Coil address, value: high=0x01, low=0x00
-        $errorCount++;
-        echo "errorCount: " . $errorCount . "\n";
-        sleep($beat_period);
-        if ($errorCount==5) {
-            $errorCount = 0;
-            break;
-        }
-    }
-    sleep($beat_period);
     
-    echo "------------------------ \n";
-    while (readCoils($slaveID, $address3E, $numCoils) != true) {     // SlaveID, Coil starting address, number of coils
-        $errorCount++;
-        echo "errorCount: " . $errorCount . "\n";
-        sleep($beat_period);
-        if ($errorCount==5) {
-            $errorCount = 0;
-            break;
-        }
-    }
-    sleep($beat_period);
-
-    echo "------------------------------------------------------------------------ \n";
-    echo "--------------------------- READ BIKE STATUS ---------------------------\n";
-    echo "------------------------------------------------------------------------ \n";
-    while (readCoils($slaveID, $address40, $numCoils) != true) {     // SlaveID, Coil starting address, number of coils
-        $errorCount++;
-        echo "errorCount: " . $errorCount . "\n";
-        sleep($beat_period);
-        if ($errorCount==5) {
-            $errorCount = 0;
-            break;
-        }
-    }
-    sleep($beat_period);
-    */
-
-
-
-    
-    /*
-    while (readCoils($slaveID, $address40, $numCoils) != true) {     // SlaveID, Coil starting address, number of coils
-        $errorCount++;
-        echo "errorCount: " . $errorCount . "\n";
-        sleep($beat_period);
-        if ($errorCount==5) {
-            $errorCount = 0;
-            break;
-        }
-    }
-    sleep($beat_period);
-
-    // Get status on bike in garage
-    while (readCoils($slaveID, $address40, $numCoils) != true) {     // SlaveID, Coil starting address, number of coils
-        $errorCount++;
-        echo "errorCount: " . $errorCount . "\n";
-        sleep($beat_period);
-        if ($errorCount==5) {
-            $errorCount = 0;
-            break;
-        }
-    }
-    sleep($beat_period);
-
-    if($recData1 == True && $bikeLeft = false){
-        
-        returnBike();
-    }
-
-    // If bike is in garage and return is made
-    if($recData1 == True && $bikeLeased = false){
-        
-        returnBike();
-    }
-    */
-    
-    /*
     switch ($state) {
         case 0:
-        echo "Seariching \n";
             // Search for orders
             if (opendoor()) {
                 echo "Order found \n";
@@ -179,7 +71,7 @@ while (1) {
             }
             break;
         case 1:
-        echo "Waiting for bike to leave \n";
+            // Check if bike have left the garage
             while (readCoils($slaveID, $address40, $numCoils) != true) {     // SlaveID, Coil starting address, number of coils
                 $errorCount++;
                 echo "errorCount: " . $errorCount . "\n";
@@ -195,7 +87,7 @@ while (1) {
             }
             break;
         case 2:
-        echo "Waiting for bike to return \n";
+            // Check if bike have retured to garage
             while (readCoils($slaveID, $address40, $numCoils) != true) {     // SlaveID, Coil starting address, number of coils
                 $errorCount++;
                 echo "errorCount: " . $errorCount . "\n";
@@ -206,28 +98,20 @@ while (1) {
                 }
             }
             sleep($beat_period);
-            //if ($recData1 == 1) {
-              //  echo " recdata = 1";
-                //returnBike();
-                //$state = 0;
-           // }
+            // Set bike to returned in database
+            if ($recData1 == 1) {
+                returnBike();
+                $state = 0;
+            }
             break;
         default:
             
             # code...
             break;
     }
-    */
-
-    //opendoor();
-
-    returnBike();
-
-    die();
-    
 }
     
-
+// Set bike to returned in database
 function returnBike() {
     global $recData1, $servername, $username, $pasword, $wordpress, $conn, $beat_period, $slaveID, $address3E, $coilValue;
     
@@ -272,6 +156,8 @@ function returnBike() {
     
     $conn->close();
 }
+
+// Search for new orders in the database. Send message to "start" garage and give out bike
 function opendoor(){
     global $recData1, $servername, $username, $pasword, $wordpress, $conn, $beat_period, $slaveID, $address3E, $coilValue;
     $isdoorOpened = "SELECT doorlocked FROM Cykel_Fack WHERE fackID = 2 ";
