@@ -1,2 +1,4 @@
 # Elcykelpool
-Utvecklingsprojekt
+Utvecklingsprojekt på Högskolan i Halmstad
+
+Server
