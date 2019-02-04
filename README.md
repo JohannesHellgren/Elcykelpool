@@ -3,7 +3,8 @@ Utvecklingsprojekt på Högskolan i Halmstad
 
 Hyr en elcykel via en hemsida, cykeln hämtas och lämnas från ett elcykelgarage. 
 
-Server:
+
+Server (master):
 
 Raspberry pi, raspbian.
 phpMyAdmin, MySQL databas
@@ -13,8 +14,9 @@ UDP Modbus meddelande mellan server och garage.
 
 Gateway:
 
-Arduino Uno i garage som konverterar mellan UDP Modbus och RTU Modbus.
+Arduino Uno i garage som konverterar mellan UDP Modbus och RTU Modbus. Ethernet-kabel mellan server och gateway under utvecklingen (ethernet-shield). Gateway kommunicerar mellan alla fack parallellkopplade via RS-485.
 
-Garage:
+
+Garage (slave):
  
-Arduino Pro Mini
+Arduino Pro Mini, en i varje fack (3st per garage). Tar emot och svarar på RTU Modbus meddelanden. Sköter styrning av garage (knappsats, lampor, cykelhiss, dörrlås, dörrgivare, cykelgivare, laddningsspänning osv.).
