@@ -18,6 +18,8 @@ Arduino Pro Mini, en i varje fack (3st per garage). Tar emot och svarar på RTU 
 # Verktyg/metoder använda/lärda
 Raspberry pi 3, raspbian (linux) operativsystem <br>
 Arduino, arduino create, C++ <br>
-PHP <br>
+Internet kommunikation. IPv4, mac, dhcp, ssh, telnet, udp, socket, port <br>
+RS-485, RS-232. RTU Modbus <br>
+PHP, hämta från och skriva till MySQL databas. Skicka/ta emot UDP meddelanden <br>
 PHPMyAdmin, MySQL databas <br>
 Wordpress <br>
