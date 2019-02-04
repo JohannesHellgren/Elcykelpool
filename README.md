@@ -26,6 +26,6 @@ Raspberry pi 3, raspbian (linux) operativsystem
 
 Arduino, arduino create, C++
 
-PHP
+PHP <br>
 PHPMyAdmin, MySQL databas
 Wordpress
