@@ -25,6 +25,8 @@ Arduino Pro Mini, en i varje fack (3st per garage). Tar emot och svarar på RTU 
 Raspberry pi 3, raspbian (linux) operativsystem
 
 Arduino, arduino create, C++
+
+
 PHP
 PHPMyAdmin, MySQL databas
 Wordpress
