@@ -23,3 +23,4 @@ RS-485, RS-232, RS-422. RTU Modbus <br>
 PHP, hämta från och skriva till MySQL databas. Skicka/ta emot UDP meddelanden <br>
 PHPMyAdmin, MySQL databas <br>
 Wordpress <br>
+
