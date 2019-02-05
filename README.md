@@ -12,7 +12,7 @@ UDP Modbus meddelande mellan server och garage.
 Gateway: <br>
 Arduino Uno i garage som konverterar mellan UDP Modbus och RTU Modbus. Ethernet-kabel mellan server och gateway under utvecklingen (ethernet-shield). Gateway kommunicerar mellan alla fack parallellkopplade via RS-485.
 
-Garage (slave): <br>
+"Com-Module" (slave): <br>
 Arduino Pro Mini, en i varje fack (3st per garage). Tar emot och svarar på RTU Modbus meddelanden. Sköter styrning av garage (knappsats, lampor, cykelhiss, dörrlås, dörrgivare, cykelgivare, laddningsspänning osv.).
 
 # Verktyg/metoder använda/lärda
