@@ -1,6 +1,6 @@
 # Elcykelpool
 Utvecklingsprojekt på Högskolan i Halmstad <br>
-Hyr en elcykel via en hemsida, cykeln hämtas och lämnas från ett elcykelgarage. 
+Hyr en elcykel via en hemsida, cykeln hämtas och lämnas från ett elcykelgarage på Högskolan i Halmstad.
 
 Server (master): <br>
 Server på en Raspberry pi 3, raspbian.
